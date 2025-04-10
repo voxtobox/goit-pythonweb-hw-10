@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "goit-pythonweb-hw-08"
+version = "0.1.0"
+description = ""
+authors = ["Volodymyr Antoniuk <voxtobox@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sqlalchemy = "^2.0.40"
+alembic = "^1.15.2"
+asyncpg = "^0.30.0"
+pydantic = "^2.11.3"
+fastapi = "^0.115.12"
+uvicorn = "^0.34.0"
+email-validator = "^2.2.0"
+dotenv = "^0.9.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
