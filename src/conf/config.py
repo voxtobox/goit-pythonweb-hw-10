@@ -1,21 +1,31 @@
-import os
-from dotenv import load_dotenv
-
-# load env variables
-load_dotenv()
-
-# get envs from variables
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
-DB_NAME = os.getenv("DB_NAME")
+from pydantic import ConfigDict, EmailStr
+from pydantic_settings import BaseSettings
 
 
-class Config:
-    DB_URL = (
-        f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+class Settings(BaseSettings):
+    DB_URL: str
+    JWT_SECRET: str
+    JWT_ALGORITHM: str = "HS256"
+    JWT_EXPIRATION_SECONDS: int = 3600
+
+    MAIL_USERNAME: EmailStr
+    MAIL_PASSWORD: str
+    MAIL_FROM: EmailStr
+    MAIL_PORT: int = 465
+    MAIL_SERVER: str
+    MAIL_FROM_NAME: str
+    MAIL_STARTTLS: bool = False
+    MAIL_SSL_TLS: bool = True
+    USE_CREDENTIALS: bool = True
+    VALIDATE_CERTS: bool = True
+
+    CLD_NAME: str
+    CLD_API_KEY: int
+    CLD_API_SECRET: str
+
+    model_config = ConfigDict(
+        extra="ignore", env_file=".env", env_file_encoding="utf-8", case_sensitive=True
     )
 
 
-config = Config
+settings = Settings()
